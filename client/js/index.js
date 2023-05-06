@@ -105,6 +105,8 @@ function displayDiaryEntry(date) {
 
   // Input 
   create_input('input_one', get(day), 'Work carried out');
+  create_input('input_two', get(day), 'Skills developed');
+
 
   // Button Submit
   create_button('submitbtn', 'Save', function () {
@@ -134,7 +136,6 @@ function create_button(id, content, onclick_func, onclick_params) {
   }
   diaryEntryElement.appendChild(btn);
 }
-
 function create_input(id, content, placeholder) {
   const input = document.createElement('textarea');
   input.id = id;
