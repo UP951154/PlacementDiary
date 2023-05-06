@@ -98,19 +98,29 @@ function displayDiaryEntry(date) {
   diaryEntryElement.innerHTML = "";
   var day = date.getDate();
 
+
   // Date
   var header = document.createElement("h2");
   header.innerHTML = date.toDateString();
   diaryEntryElement.appendChild(header);
 
   // Input 
-  create_input('input_one', get(day), 'Work carried out');
-  create_input('input_two', get(day), 'Skills developed');
+  var inputOneValue = '';
+  var inputTwoValue = '';
+  var inputThreeValue = '';
 
+  create_input('input_one', inputOneValue, 'Work carried out');
+  create_input('input_two', inputTwoValue, 'Skills developed');
+  create_input('input_three', inputThreeValue, 'Competency');
 
   // Button Submit
   create_button('submitbtn', 'Save', function () {
-    give(day, input_one.value)
+    var inputOneValue = document.getElementById('input_one').value;
+    var inputTwoValue = document.getElementById('input_two').value;
+    var inputThreeValue = document.getElementById('input_three').value;
+    var arr = [inputOneValue, inputTwoValue, inputThreeValue];
+    give(day, JSON.stringify(arr));
+
   });
 
   // Button Remove
@@ -118,6 +128,14 @@ function displayDiaryEntry(date) {
 
   // Button Clear
   create_button('clearbtn', 'Reset', clear);
+
+  // Get stored values and set input values
+  var storedArr = JSON.parse(get(day));
+  if (storedArr && storedArr.length === 3) {
+    document.getElementById('input_one').value = storedArr[0];
+    document.getElementById('input_two').value = storedArr[1];
+    document.getElementById('input_three').value = storedArr[2];
+  }
 
 }
 
@@ -146,6 +164,7 @@ function create_input(id, content, placeholder) {
 }
 
 // Local Storage Functions
+
 
 function give(key, value) {
   localStorage.setItem(key, value);
