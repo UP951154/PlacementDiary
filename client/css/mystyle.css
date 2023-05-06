@@ -1,0 +1,75 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: rgb(211, 211, 211);
+}
+
+body {
+    background-color: white;
+}
+
+td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+td.today {
+    background-color: #f2777b;
+}
+
+td.disabled {
+    background-color: #262624;
+}
+
+#diaryEntry {
+    margin-top: 20px;
+}
+
+#diaryEntry h2 {
+    margin-bottom: 10px;
+}
+
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
+#input_one {
+    width: 95.5%;
+    padding: 14px 28px;
+    font-size: 15px;
+}
+
+#diarybtn,
+#submitbtn,
+#removebtn,
+#clearbtn {
+    width: 99%;
+    flex: 1;
+    margin: 5px;
+    padding: 14px 28px;
+    font-size: 15px;
+}
+
+
+
+textarea {
+    display: inline-block;
+    width: 29%;
+    margin-right: 2%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    resize: none;
+}
+
+#area {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
