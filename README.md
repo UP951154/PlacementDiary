@@ -18,12 +18,18 @@ localhost:8080
 ```
 
     
-## How to use
+## Features
 
-* Pick a date from the calendar
-* Insert text
-* Submit, Delete or Clear/Reset
+* Insert entry
+* Edit entry
+* Submit, Delete or Clear/Reset buttons
+* Read-only mode
+* Print formatted document
+* Share button
 
-https://github.com/UP951154/PlacementDiary/assets/92365405/6328a8af-ffff-4302-bf4f-384014328c79
+https://github.com/UP951154/PlacementDiary/assets/92365405/307aef80-79c4-48ab-b20a-5af0fcfd0bee
+
+
+
 
 
