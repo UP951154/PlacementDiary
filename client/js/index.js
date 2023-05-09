@@ -1,3 +1,4 @@
+/* eslint-disable no-var */
 
 function pageLoaded() {
   console.log('js ready');
@@ -130,7 +131,7 @@ function getMonthName(month) {
 }
 
 function displayDiaryEntry(date) {
-  diaryEntryElement.innerHTML = "";
+  diaryEntryElement.innerHTML = '';
   var day = date.getDate();
 
 
@@ -140,7 +141,7 @@ function displayDiaryEntry(date) {
   header.innerHTML = date.toDateString();
   diaryEntryElement.appendChild(header);
 
-  // Input 
+  // Input
   var inputOneValue = '';
   var inputTwoValue = '';
   var inputThreeValue = '';

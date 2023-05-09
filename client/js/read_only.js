@@ -1,15 +1,17 @@
+/* eslint-disable indent */
+/* eslint-disable no-var */
 
 function pageLoaded() {
     console.log('js ready');
 }
 
-const today = new Date();
-const currentMonth = today.getMonth();
-const currentYear = today.getFullYear();
+var today = new Date();
+var currentMonth = today.getMonth();
+var currentYear = today.getFullYear();
 
-const calendar = document.getElementById('calendar');
-const diaryEntryElement = document.getElementById('diaryEntry');
-const button = document.getElementById('button');
+var calendar = document.getElementById('calendar');
+var diaryEntryElement = document.getElementById('diaryEntry');
+
 
 displayCalendar(currentMonth, currentYear);
 
@@ -65,10 +67,10 @@ function displayCalendar(month, year) {
 
     // Fill table with days of month
     let dayOfMonth = 1;
-    for (var i = 0; i < 6; i++) {
+    for (let i = 0; i < 6; i++) {
         const rowElement = document.createElement('tr');
         for (let j = 0; j < 7; j++) {
-            var cell = document.createElement('td');
+            const cell = document.createElement('td');
             cell.classList.add('day');
             if ((i === 0 && j < new Date(year, month, 1).getDay()) || dayOfMonth > daysInMonth) {
                 // Display empty cell for days before first day of month or after last day of month
@@ -148,17 +150,17 @@ function displayDiaryEntry(date) {
         inputThreeValue = storedArr[2];
     }
 
-    var para = document.createElement('p');
-    para.innerHTML = inputOneValue;
-    diaryEntryElement.appendChild(para);
-    var para = document.createElement('p');
-    para.innerHTML = inputTwoValue;
-    diaryEntryElement.appendChild(para);
-    var para = document.createElement('p');
-    para.innerHTML = inputThreeValue;
-    diaryEntryElement.appendChild(para);
+    var para1 = document.createElement('p');
+    para1.innerHTML = inputOneValue;
+    diaryEntryElement.appendChild(para1);
+    var para2 = document.createElement('p');
+    para2.innerHTML = inputTwoValue;
+    diaryEntryElement.appendChild(para2);
+    var para3 = document.createElement('p');
+    para3.innerHTML = inputThreeValue;
+    diaryEntryElement.appendChild(para3);
 
-    create_button('print', 'Print', popuponclick, [inputOneValue, inputTwoValue, inputThreeValue]);
+    createButton('print', 'Print', popuponclick, [inputOneValue, inputTwoValue, inputThreeValue]);
 }
 
 function popuponclick(inputOneValue, inputTwoValue, inputThreeValue) {
@@ -181,43 +183,27 @@ function popuponclick(inputOneValue, inputTwoValue, inputThreeValue) {
 
 // Utility functions
 
-function create_button(id, content, onclick_func, onclick_params) {
+function createButton(id, content, onclickFunc, onclickParams) {
     const btn = document.createElement('button');
     btn.id = id;
     btn.innerHTML = content;
     btn.addEventListener('click', function () {
-        if (Array.isArray(onclick_params)) {
-            onclick_func(...onclick_params);
+        if (Array.isArray(onclickParams)) {
+            onclickFunc(...onclickParams);
         } else {
-            onclick_func(onclick_params);
+            onclickFunc(onclickParams);
         }
     });
     diaryEntryElement.appendChild(btn);
 }
 
-function create_heading(id, content, placeholder) {
-    const input = document.createElement('h4');
-    input.id = id;
-    input.textContent = content;
-    input.placeholder = placeholder;
-    diaryEntryElement.appendChild(input);
-}
 
 // Local Storage Functions
 
-
-function give(key, value) {
-    localStorage.setItem(key, value);
-}
 function get(day) {
     return localStorage.getItem(day);
 }
-function remove(day) {
-    localStorage.removeItem(day);
-}
-function clear() {
-    localStorage.clear();
-}
+
 // deprecated in favour of using defer in the script tag
 // window.addEventListener('load', pageLoaded);
 pageLoaded();
