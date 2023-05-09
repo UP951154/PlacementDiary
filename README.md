@@ -23,6 +23,7 @@ localhost:8080
 * Pick a date from the calendar
 * Insert text
 * Submit, Delete or Clear/Reset
+
 https://github.com/UP951154/PlacementDiary/assets/92365405/6328a8af-ffff-4302-bf4f-384014328c79
 
 
