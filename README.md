@@ -25,3 +25,7 @@ localhost:8080
 * Submit, Delete or Clear/Reset
 ![Alt text](images/diary.png?raw=true "Optional Title")
 
+
+https://github.com/UP951154/PlacementDiary/assets/92365405/6328a8af-ffff-4302-bf4f-384014328c79
+
+
