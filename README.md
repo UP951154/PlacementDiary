@@ -22,7 +22,9 @@ localhost:8080
 
 * Insert entry
 * Edit entry
-* Submit, Delete or Clear/Reset buttons
+* Submit button saves selected entry
+* Delete button deletes selected entry
+* Clear/Reset deletes all entries
 * Read-only mode
 * Print formatted document
 * Share button
