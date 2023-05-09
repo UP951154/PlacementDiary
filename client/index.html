@@ -2,29 +2,41 @@
 <html>
 
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="css/mystyle.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <meta charset="UTF-8">
   <title>Placement Diary</title>
 
 </head>
 
 <body>
-  <h1>Placement Diary</h1>
 
+
+  <span onclick="openNav()" class="fa fa-bars fa-2x"></span>
+  <h1>
+    Placement Diary</h1>
 
 
   <div id="calendar"></div>
 
 
-
-
   <div id="diaryEntry">
     <h2>No date selected</h2>
     <p>Please select a date from the calendar above to view or add an entry</p>
+
   </div>
 
-  <script src="js/index.js"></script>
 
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="read_only.html">Read Only Mode</a>
+    <a id="share-btn">Share</a>
+
+  </div>
+
+
+  <script src="js/index.js"></script>
 </body>
 
 </html>

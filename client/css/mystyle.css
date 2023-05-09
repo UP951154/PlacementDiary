@@ -1,71 +1,144 @@
-table {
-    border-collapse: collapse;
-    width: 100%;
-    background-color: rgb(211, 211, 211);
+h1 {
+    text-align: center;
+    white-space: nowrap;
 }
 
-body {
-    background-color: white;
+.day {
+    cursor: pointer;
+}
+
+.selected {
+    background-color: grey;
+}
+
+#calendar {
+
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
 td {
-    border: 1px solid black;
+    border: 1px solid #ccc;
     padding: 10px;
     text-align: center;
+    vertical-align: middle;
+    font-size: 18px;
 }
 
-td.today {
-    background-color: #f2777b;
+td:hover {
+    background-color: lightgray;
 }
 
-td.disabled {
-    background-color: #262624;
+
+
+.calendar-btn {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0 10px;
+}
+
+.calendar-btn:hover {
+    background-color: grey;
+}
+
+.today {
+    background-color: red;
+}
+
+/* ARROWS */
+
+#nextMonth,
+#prevMonth {
+    float: right;
 }
 
 #diaryEntry {
-    margin-top: 20px;
-}
-
-#diaryEntry h2 {
-    margin-bottom: 10px;
-}
-
-h1 {
+    background-color: whitesmoke;
+    margin-top: 50px;
     text-align: center;
-    text-transform: uppercase;
+    padding: 0%;
 }
 
-#input_two,
-#input_one,
-#input_three {
-    width: 95.5%;
-    padding: 14px 28px;
-    font-size: 15px;
-}
-
-#diarybtn,
-#submitbtn,
-#removebtn,
-#clearbtn {
-    width: 99%;
-    flex: 1;
-    margin: 5px;
-    padding: 14px 28px;
-    font-size: 15px;
-}
-
-
-
-textarea {
-    display: inline-block;
-    width: 29%;
-    margin-right: 2%;
-    margin-bottom: 10px;
+.input {
+    display: inline;
+    width: 27%;
+    height: 80px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #f7f7f7;
     font-size: 16px;
-    font-family: Arial, sans-serif;
-    resize: none;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.functions {
+    display: inline-block;
+    background-color: whitesmoke;
+    font-size: 25px;
+    display: inline;
+    width: 10%;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    margin-right: 25px;
+    margin-left: 25px;
+    margin-top: 20px;
+}
+
+/* Testing 
+
+/* The side navigation menu */
+.sidenav {
+    height: 100%;
+    /* 100% Full-height */
+    width: 0;
+    /* 0 width - change this with JavaScript */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Stay on top */
+    top: 0;
+    /* Stay at the top */
+    left: 0;
+    background-color: #111;
+    /* Black*/
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    padding-top: 60px;
+    /* Place content 60px from the top */
+    transition: 0.5s;
+    /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
 }
