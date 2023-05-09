@@ -36,6 +36,8 @@ td:hover {
     background-color: lightgray;
 }
 
+
+
 .calendar-btn {
     border: none;
     background-color: transparent;
@@ -76,6 +78,9 @@ td:hover {
     margin-left: 1%;
 }
 
+
+
+
 .functions {
     display: inline-block;
     background-color: whitesmoke;
@@ -88,6 +93,10 @@ td:hover {
     margin-right: 25px;
     margin-left: 25px;
     margin-top: 20px;
+}
+
+.functions:active {
+    background-color: grey;
 }
 
 /* Testing 
