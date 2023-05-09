@@ -5,7 +5,7 @@ This is web-based version of a placement diary that can easily run on a phone, s
 
 ## Installation
 
-Install this with node, by typing the following code into the terminal
+Install node and run the following commands on the terminal
 
 ```bash
   npm install my-project
