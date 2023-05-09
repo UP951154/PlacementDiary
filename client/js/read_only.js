@@ -160,24 +160,29 @@ function displayDiaryEntry(date) {
     para3.innerHTML = inputThreeValue;
     diaryEntryElement.appendChild(para3);
 
-    createButton('print', 'Print', popuponclick, [inputOneValue, inputTwoValue, inputThreeValue]);
+    createButton('print', 'Print', popuponclick, [date, inputOneValue, inputTwoValue, inputThreeValue]);
 }
 
-function popuponclick(inputOneValue, inputTwoValue, inputThreeValue) {
-    const myWindow = window.open(
-        '',
-        'mywindow',
-        'status=1,width=350,height=150',
-    );
-    myWindow.document.write('<html><head><title>Print Me</title></head>');
-    myWindow.document.write('<body onafterprint="self.close()">');
-    myWindow.document.write('<p> Work carried out </p>');
-    myWindow.document.write('<p>' + inputOneValue + '</p>');
-    myWindow.document.write('<p> Knowledge/Experience gained or applied. (Please relate to technical and soft skills developed) </p>');
-    myWindow.document.write('<p>' + inputTwoValue + '</p>');
-    myWindow.document.write('<p> Competency </p>');
-    myWindow.document.write('<p>' + inputThreeValue + '</p>');
-    myWindow.document.write('</body></html>');
+function popuponclick(date, input1, input2, input3) {
+    // eslint-disable-next-line no-unused-vars
+    const myWindow = window.open('', '', window);
+
+    const heading = myWindow.document.createElement('h1');
+    heading.textContent = date.toDateString();
+
+    const data1 = myWindow.document.createElement('p');
+    data1.innerHTML = `<h3>Work carried out</h3>${input1}`;
+
+    const data2 = myWindow.document.createElement('p');
+    data2.innerHTML = `<h3>Knowledge/Experience gained</h3>${input2}`;
+
+    const data3 = myWindow.document.createElement('p');
+    data3.innerHTML = `<h3>Competency</h3>${input3}`;
+
+    myWindow.document.body.appendChild(heading);
+    myWindow.document.body.appendChild(data1);
+    myWindow.document.body.appendChild(data2);
+    myWindow.document.body.appendChild(data3);
 }
 
 
