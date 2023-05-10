@@ -4,15 +4,15 @@
 This is web-based version of a placement diary that can easily run on a phone, so that it is readily available to the student to make notes as they are doing the work, and then edit later (perhaps on a desktop).
 
 ## Installation
-
-Install node and run the following commands on the terminal
+1. Clone or download repo
+2. Install node and run the following commands inside repo directory
 
 ```bash
   npm install my-project
   npm run setup (if necessary)
   npm start
 ```
-Paste the url on your browser
+3. Paste the url on your browser
 ```bash
 localhost:8080
 ```
