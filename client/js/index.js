@@ -126,33 +126,36 @@ function getMonthName(month) {
 
 function displayDiaryEntry(date) {
   diaryEntryElement.innerHTML = '';
-  var day = date.getDate();
-
+  const day = date.getDate();
 
   // Date
-  var header = document.createElement('h2');
+  const header = document.createElement('h2');
   header.id = 'diary_header';
   header.innerHTML = date.toDateString();
   diaryEntryElement.appendChild(header);
 
   // Input
-  var inputOneValue = '';
-  var inputTwoValue = '';
-  var inputThreeValue = '';
+  const inputOneValue = '';
+  const inputTwoValue = '';
+  const inputThreeValue = '';
 
   createInput('inputOne', inputOneValue, 'Work carried out');
   createInput('inputTwo', inputTwoValue, 'Skills developed');
   createInput('inputThree', inputThreeValue, 'Competency');
+
+  // eslint-disable-next-line no-undef
   inputOne.classList.add('input');
+  // eslint-disable-next-line no-undef
   inputTwo.classList.add('input');
-  inputThree.classList.add('input');
+  // eslint-disable-next-line no-undef
+  inputThree.classList.add('input'); // these inputs are defined with the createInput() function.
 
   // Button Submit
   createButton('submitbtn', '<i class="fa fa-check"></i>', function () {
-    var inputOneValue = document.getElementById('inputOne').value;
-    var inputTwoValue = document.getElementById('inputTwo').value;
-    var inputThreeValue = document.getElementById('inputThree').value;
-    var arr = [inputOneValue, inputTwoValue, inputThreeValue];
+    const inputOneValue = document.getElementById('inputOne').value;
+    const inputTwoValue = document.getElementById('inputTwo').value;
+    const inputThreeValue = document.getElementById('inputThree').value;
+    const arr = [inputOneValue, inputTwoValue, inputThreeValue];
     give(day, JSON.stringify(arr));
   });
 
@@ -162,11 +165,15 @@ function displayDiaryEntry(date) {
   // Button Clear
   createButton('clearbtn', '<i class="fa fa-times"></i>', clear);
 
+  // eslint-disable-next-line no-undef
   submitbtn.classList.add('functions');
+  // eslint-disable-next-line no-undef
   removebtn.classList.add('functions');
-  clearbtn.classList.add('functions');
+  // eslint-disable-next-line no-undef
+  clearbtn.classList.add('functions'); // These buttons are defined with the createButton() function.
+
   // Get stored values and set input values
-  var storedArr = JSON.parse(get(day));
+  const storedArr = JSON.parse(get(day));
   if (storedArr && storedArr.length === 3) {
     document.getElementById('inputOne').value = storedArr[0];
     document.getElementById('inputTwo').value = storedArr[1];
