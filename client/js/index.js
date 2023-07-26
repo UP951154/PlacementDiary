@@ -7,71 +7,47 @@ function pageLoaded() {
   });
 }
 
-let today = new Date();
-let currentMonth = today.getMonth();
-let currentYear = today.getFullYear();
-
-let diaryEntryElement = document.getElementById('diaryEntry');
-let button = document.getElementById('button');
+const today = new Date();
+const currentMonth = today.getMonth();
+const currentYear = today.getFullYear();
+const diaryEntryElement = document.getElementById('diaryEntry');
 
 displayCalendar(currentMonth, currentYear);
 
-calendar.addEventListener('click', function (event) {
-  if (event.target.classList.contains('day')) {
-    let day = event.target.innerHTML;
-    let month = currentMonth;
-    let year = currentYear;
-
-    // Remove selected class from previously selected day
-    const selectedDay = document.querySelector('.selected');
-    if (selectedDay) {
-      selectedDay.classList.remove('selected');
-    }
-
-    // Add selected class to selected day
-    event.target.classList.add('selected');
-
-    // Update diary entry for selected date
-    const date = new Date(year, month, day);
-
-    displayDiaryEntry(date);
-  }
-});
-
 function displayCalendar(month, year) {
-  var daysInMonth = getDaysInMonth(month, year);
+  const daysInMonth = getDaysInMonth(month, year);
   const calendar = document.getElementById('calendar');
 
   // Clear calendar
   calendar.innerHTML = '';
 
   // Set calendar header
-  var header = document.createElement('h2');
+  const header = document.createElement('h2');
 
   header.innerHTML = getMonthName(month) + ' ' + year;
   calendar.appendChild(header);
 
   // Create table for calendar
-  var table = document.createElement('table');
+  const table = document.createElement('table');
   calendar.appendChild(table);
 
   // Create table header with weekday names
-  var row = document.createElement('tr');
+  const row = document.createElement('tr');
   table.appendChild(row);
-  var weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  for (var i = 0; i < weekdays.length; i++) {
-    var cell = document.createElement('td');
+  const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  for (let i = 0; i < weekdays.length; i++) {
+    const cell = document.createElement('td');
     cell.innerHTML = weekdays[i];
     row.appendChild(cell);
   }
 
   // Fill table with days of month
-  var dayOfMonth = 1;
+  let dayOfMonth = 1;
   for (let i = 0; i < 6; i++) {
-    var rowElement = document.createElement('tr');
-    for (var j = 0; j < 7; j++) {
+    const rowElement = document.createElement('tr');
+    for (let j = 0; j < 7; j++) {
       // eslint-disable-next-line no-redeclare
-      var cell = document.createElement('td');
+      const cell = document.createElement('td');
       cell.classList.add('day');
       if ((i === 0 && j < new Date(year, month, 1).getDay()) || dayOfMonth > daysInMonth) {
         // Display empty cell for days before first day of month or after last day of month
@@ -89,8 +65,30 @@ function displayCalendar(month, year) {
     table.appendChild(rowElement);
   }
 
+  addEventListener('click', function (event) {
+    if (event.target.classList.contains('day')) {
+      const day = event.target.innerHTML;
+      const month = currentMonth;
+      const year = currentYear;
+
+      // Remove selected class from previously selected day
+      const selectedDay = document.querySelector('.selected');
+      if (selectedDay) {
+        selectedDay.classList.remove('selected');
+      }
+
+      // Add selected class to selected day
+      event.target.classList.add('selected');
+
+      // Update diary entry for selected date
+      const date = new Date(year, month, day);
+
+      displayDiaryEntry(date);
+    }
+  });
+
   // Add buttons to change month
-  var nextMonth = document.createElement('button');
+  const nextMonth = document.createElement('button');
   nextMonth.innerHTML = '<i class="fa fa-chevron-right"></i>';
   nextMonth.classList.add('calendar-btn');
   nextMonth.id = 'nextMonth';
@@ -103,7 +101,7 @@ function displayCalendar(month, year) {
   });
   header.appendChild(nextMonth);
 
-  var prevMonth = document.createElement('button');
+  const prevMonth = document.createElement('button');
   prevMonth.id = 'prevMonth';
   prevMonth.innerHTML = '<i class="fa fa-chevron-left"></i>';
   prevMonth.classList.add('calendar-btn');
@@ -122,7 +120,7 @@ function getDaysInMonth(month, year) {
 }
 
 function getMonthName(month) {
-  var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   return monthNames[month];
 }
 
@@ -200,6 +198,14 @@ function createInput(id, content, placeholder) {
   diaryEntryElement.appendChild(input);
 }
 
+function openNav() {
+  document.getElementById('mySidenav').style.width = '250px';
+}
+
+function closeNav() {
+  document.getElementById('mySidenav').style.width = '0';
+}
+
 // Local Storage Functions
 
 function give(key, value) {
@@ -215,13 +221,4 @@ function clear() {
   localStorage.clear();
 }
 
-
-function openNav() {
-  document.getElementById('mySidenav').style.width = '250px';
-}
-
-
-function closeNav() {
-  document.getElementById('mySidenav').style.width = '0';
-}
 pageLoaded();
