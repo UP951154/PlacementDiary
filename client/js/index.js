@@ -205,12 +205,14 @@ function createInput(id, content, placeholder) {
   diaryEntryElement.appendChild(input);
 }
 
+// eslint-disable-next-line no-unused-vars
 function openNav() {
   document.getElementById('mySidenav').style.width = '250px';
 }
 
+// eslint-disable-next-line no-unused-vars
 function closeNav() {
-  document.getElementById('mySidenav').style.width = '0';
+  document.getElementById('mySidenav').style.width = '0'; // These functions are used inside the HTML file
 }
 
 // Local Storage Functions
