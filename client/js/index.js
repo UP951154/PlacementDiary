@@ -1,34 +1,29 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
-/* eslint-disable no-var */
-
 function pageLoaded() {
   console.log('js ready');
-  var shareButton = document.getElementById('share-btn');
+  const shareButton = document.getElementById('share-btn');
   shareButton.addEventListener('click', function () {
-    var readOnlyLink = window.location.origin + '/read_only.html';
+    const readOnlyLink = window.location.origin + '/read_only.html';
     alert('Share this link with others to view your diary: \n\n' + readOnlyLink);
   });
 }
 
-var today = new Date();
-var currentMonth = today.getMonth();
-var currentYear = today.getFullYear();
+let today = new Date();
+let currentMonth = today.getMonth();
+let currentYear = today.getFullYear();
 
-var calendar = document.getElementById('calendar');
-var diaryEntryElement = document.getElementById('diaryEntry');
-var button = document.getElementById('button');
+let diaryEntryElement = document.getElementById('diaryEntry');
+let button = document.getElementById('button');
 
 displayCalendar(currentMonth, currentYear);
 
 calendar.addEventListener('click', function (event) {
   if (event.target.classList.contains('day')) {
-    var day = event.target.innerHTML;
-    var month = currentMonth;
-    var year = currentYear;
+    let day = event.target.innerHTML;
+    let month = currentMonth;
+    let year = currentYear;
 
     // Remove selected class from previously selected day
-    var selectedDay = document.querySelector('.selected');
+    const selectedDay = document.querySelector('.selected');
     if (selectedDay) {
       selectedDay.classList.remove('selected');
     }
@@ -37,7 +32,7 @@ calendar.addEventListener('click', function (event) {
     event.target.classList.add('selected');
 
     // Update diary entry for selected date
-    var date = new Date(year, month, day);
+    const date = new Date(year, month, day);
 
     displayDiaryEntry(date);
   }
@@ -45,7 +40,7 @@ calendar.addEventListener('click', function (event) {
 
 function displayCalendar(month, year) {
   var daysInMonth = getDaysInMonth(month, year);
-  var calendar = document.getElementById('calendar');
+  const calendar = document.getElementById('calendar');
 
   // Clear calendar
   calendar.innerHTML = '';
