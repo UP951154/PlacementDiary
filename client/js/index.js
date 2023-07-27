@@ -158,17 +158,16 @@ function displayDiaryEntry(date) {
     const arr = [inputOneValue, inputTwoValue, inputThreeValue];
     give(day, JSON.stringify(arr));
   });
+   // eslint-disable-next-line no-undef
+   submitbtn.classList.add('functions');
 
   // Button Remove
   createButton('removebtn', '<i class="fa fa-trash"></i>', remove, day);
+   // eslint-disable-next-line no-undef
+   removebtn.classList.add('functions');
 
   // Button Clear
   createButton('clearbtn', '<i class="fa fa-times"></i>', clear);
-
-  // eslint-disable-next-line no-undef
-  submitbtn.classList.add('functions');
-  // eslint-disable-next-line no-undef
-  removebtn.classList.add('functions');
   // eslint-disable-next-line no-undef
   clearbtn.classList.add('functions'); // These buttons are defined with the createButton() function.
 
