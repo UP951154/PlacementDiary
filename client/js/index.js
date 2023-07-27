@@ -160,16 +160,18 @@ function displayDiaryEntry(date) {
   });
    // eslint-disable-next-line no-undef
    submitbtn.classList.add('functions');
-
+   submitbtn.title = 'Click here to save your data'; 
   // Button Remove
   createButton('removebtn', '<i class="fa fa-trash"></i>', remove, day);
    // eslint-disable-next-line no-undef
    removebtn.classList.add('functions');
+   removebtn.title = 'Click here to erase the data for this day'; 
 
   // Button Clear
   createButton('clearbtn', '<i class="fa fa-times"></i>', clear);
   // eslint-disable-next-line no-undef
   clearbtn.classList.add('functions'); // These buttons are defined with the createButton() function.
+  clearbtn.title = 'Click here to ERASE ALL YOUR DATA! '; 
 
   // Get stored values and set input values
   const storedArr = JSON.parse(get(day));
