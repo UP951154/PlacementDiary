@@ -49,19 +49,20 @@ td {
     cursor:pointer;  
 }
 
-
 /* Current day of the month square*/
 .today {
     background-color: var(--maincol);
     color: white;
 }
 
+/* Full date of the month your inserting entries */
 #diaryEntry {
     margin-top: 25px;
     text-align: center;
     padding: 0%;
 }
 
+/* Input boxes */
 .input {
     display: inline;
     width: 27%;
@@ -74,6 +75,7 @@ td {
     margin-left: 1%;
 }
 
+/* Function Buttons */
 .functions {
     display: inline-block;
     background-color: white;
@@ -88,6 +90,7 @@ td {
     margin-top: 20px;
 }
 
+/* Function buttons when clicked */
 .functions:active {
     background-color: grey;
 }
