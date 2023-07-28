@@ -62,10 +62,6 @@ td {
     padding: 0%;
 }
 
-#clearbtn{
-   margin-left: 500px;
-}
-
 /* Input boxes */
 .input {
     display: inline;
@@ -141,6 +137,11 @@ td:hover, .calendar-btn:hover  {
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
+}
+#icon{
+    position: absolute;
+    top: 10px;
+    left: 10px;
 }
 
 @media (max-width: 500px){
