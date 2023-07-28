@@ -8,6 +8,7 @@ This is web-based version of a placement diary that can easily run on a phone, s
 2. Install node and run the following commands inside repo directory
 
 ```bash
+  npm install
   node server.js
 ```
 3. Paste the url on your browser
