@@ -5,7 +5,8 @@ This is web-based version of a placement diary that can easily run on a phone, s
 
 ## Installation
 1. Clone or download repo
-2. Install node and run the following commands inside repo directory
+2. Install node
+3. Run the following commands inside repo directory
 
 ```bash
   npm install
@@ -15,6 +16,7 @@ This is web-based version of a placement diary that can easily run on a phone, s
 ```bash
 localhost:8080
 ```
+4. Enjoy
 
     
 ## Features
