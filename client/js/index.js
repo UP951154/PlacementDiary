@@ -5,6 +5,8 @@ function pageLoaded() {
     const readOnlyLink = window.location.origin + '/read_only.html';
     alert('Share this link with others to view your diary: \n\n' + readOnlyLink);
   });
+  document.getElementById('icon').addEventListener('click', openNav);
+  document.getElementById('closeBtn').addEventListener('click', closeNav);
 }
 
 const today = new Date();
@@ -46,7 +48,6 @@ function displayCalendar(month, year) {
   for (let i = 0; i < 6; i++) {
     const rowElement = document.createElement('tr');
     for (let j = 0; j < 7; j++) {
-      // eslint-disable-next-line no-redeclare
       const cell = document.createElement('td');
       cell.classList.add('day');
       if ((i === 0 && j < new Date(year, month, 1).getDay()) || dayOfMonth > daysInMonth) {
@@ -143,11 +144,11 @@ function displayDiaryEntry(date) {
   createInput('inputTwo', inputTwoValue, 'Skills developed');
   createInput('inputThree', inputThreeValue, 'Competency');
 
-  // eslint-disable-next-line no-undef
+
   inputOne.classList.add('input');
-  // eslint-disable-next-line no-undef
+
   inputTwo.classList.add('input');
-  // eslint-disable-next-line no-undef
+
   inputThree.classList.add('input'); // these inputs are defined with the createInput() function.
 
   // Button Submit
@@ -158,18 +159,18 @@ function displayDiaryEntry(date) {
     const arr = [inputOneValue, inputTwoValue, inputThreeValue];
     give(day, JSON.stringify(arr));
   });
-   // eslint-disable-next-line no-undef
-   submitbtn.classList.add('functions');
-   submitbtn.title = 'Click here to save your data'; 
+
+  submitbtn.classList.add('functions');
+  submitbtn.title = 'Click here to save your data'; 
   // Button Remove
   createButton('removebtn', '<i class="fa fa-trash"></i>', remove, day);
-   // eslint-disable-next-line no-undef
-   removebtn.classList.add('functions');
-   removebtn.title = 'Click here to erase the data for this day'; 
+
+  removebtn.classList.add('functions');
+  removebtn.title = 'Click here to erase the data for this day'; 
 
   // Button Clear
   createButton('clearbtn', '<i class="fa fa-times"></i>', clear);
-  // eslint-disable-next-line no-undef
+
   clearbtn.classList.add('functions'); // These buttons are defined with the createButton() function.
   clearbtn.title = 'Click here to ERASE ALL YOUR DATA! '; 
 
@@ -180,6 +181,7 @@ function displayDiaryEntry(date) {
     document.getElementById('inputTwo').value = storedArr[1];
     document.getElementById('inputThree').value = storedArr[2];
   }
+  
 }
 
 // Utility functions
@@ -206,14 +208,12 @@ function createInput(id, content, placeholder) {
   diaryEntryElement.appendChild(input);
 }
 
-// eslint-disable-next-line no-unused-vars
 function openNav() {
   document.getElementById('mySidenav').style.width = '250px';
 }
 
-// eslint-disable-next-line no-unused-vars
 function closeNav() {
-  document.getElementById('mySidenav').style.width = '0'; // These functions are used inside the HTML file
+  document.getElementById('mySidenav').style.width = '0';
 }
 
 // Local Storage Functions
