@@ -144,12 +144,10 @@ function displayDiaryEntry(date) {
   createInput('inputTwo', inputTwoValue, 'Skills developed');
   createInput('inputThree', inputThreeValue, 'Competency');
 
-
+  // These inputs are defined with the createInput() function.
   inputOne.classList.add('input');
-
   inputTwo.classList.add('input');
-
-  inputThree.classList.add('input'); // these inputs are defined with the createInput() function.
+  inputThree.classList.add('input');
 
   // Button Submit
   createButton('submitbtn', '<i class="fa fa-check"></i>', function () {
@@ -172,7 +170,7 @@ function displayDiaryEntry(date) {
   createButton('clearbtn', '<i class="fa fa-times"></i>', clear);
 
   clearbtn.classList.add('functions'); // These buttons are defined with the createButton() function.
-  clearbtn.title = 'Click here to ERASE ALL YOUR DATA! '; 
+  clearbtn.title = 'Click here to ERASE ALL YOUR DATA! ';
 
   // Get stored values and set input values
   const storedArr = JSON.parse(get(day));
@@ -181,7 +179,6 @@ function displayDiaryEntry(date) {
     document.getElementById('inputTwo').value = storedArr[1];
     document.getElementById('inputThree').value = storedArr[2];
   }
-  
 }
 
 // Utility functions
