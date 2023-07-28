@@ -17,7 +17,7 @@ This is web-based version of a placement diary that can easily run on a phone, s
 ### Areas for Improvement
 
 1. Extra Features: There were some additional features that I would have liked to incorporate, but due to time constraints, I had to prioritize the essential aspects. These extra features could have enhanced the overall appeal and utility of the application.
-2. Time Management: Throughout the development process, I faced challenges in managing my time effectively. Due to academic commitments and other responsibilities, I had limited hours to work on the project each day. Consequently, some planned features and enhancements had to be postponed or omitted entirely. To address this issue, I could have created a more detailed project timeline, breaking down tasks into smaller, manageable chunks with specific deadlines. This approach would have allowed me to prioritize tasks and allocate time more efficiently.
+2. Time Management: Throughout the development process, I faced challenges in managing my time effectively. Due to academic commitments and other responsibilities, I had limited hours to work on the project each day. Consequently, some planned features and enhancements had to be postponed or omitted entirely. To address this issue, I could have created a more detailed project timeline, breaking down tasks into smaller, manageable chunks with specific deadlines. This approach would have allowed me to prioritize tasks and allocate time more efficiently (API, DATABASE).
 
 In conclusion, even though the absence of a database presented challenges, I am proud of the work I accomplished on the project. The experience allowed me to learn valuable lessons about project management, prioritization, and working within constraints. In the future, I look forward to expanding my skills and revisiting this project with the addition of a database to address the aforementioned areas for improvement.
 
@@ -28,7 +28,7 @@ In conclusion, even though the absence of a database presented challenges, I am 
 
 ```bash
   npm install
-  node server.js
+  npm start
 ```
 3. Paste the url on your browser
 ```bash
