@@ -15,11 +15,16 @@ def process_data():
     print('Processing data')
     try:
         data = request.get_json()
-
-        date_heading = data.get('date_heading')
         
-        print(f'Data retrieved: {data}')
-        return data
+        date = data.get('date')
+        inputOne = data.get('inputOne')
+        inputTwo = data.get('inputTwo')
+        inputThree = data.get('inputThree')
+
+        print(f'Date: {date}')
+        print(f'Text: {inputOne,inputTwo,inputThree}')
+        return render_template('index.html')
+        
 
     except Exception as e:
         
