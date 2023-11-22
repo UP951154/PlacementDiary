@@ -49,9 +49,9 @@ function displayCalendar(month, year) {
     const rowElement = document.createElement('tr');
     for (let j = 0; j < 7; j++) {
       const cell = document.createElement('td');
-      cell.classList.add('day');
+      cell.classList.add('currentDay');
       if ((i === 0 && j < new Date(year, month, 1).getDay()) || dayOfMonth > daysInMonth) {
-        // Display empty cell for days before first day of month or after last day of month
+        // Display empty cell for days before first currentDay of month or after last currentDay of month
         cell.classList.add('disabled');
       } else {
         cell.innerHTML = dayOfMonth;
@@ -67,22 +67,22 @@ function displayCalendar(month, year) {
   }
 
   addEventListener('click', function (event) {
-    if (event.target.classList.contains('day')) {
-      const day = event.target.innerHTML;
+    if (event.target.classList.contains('currentDay')) {
+      const currentDay = event.target.innerHTML;
       const month = currentMonth;
       const year = currentYear;
 
-      // Remove selected class from previously selected day
+      // Remove selected class from previously selected currentDay
       const selectedDay = document.querySelector('.selected');
       if (selectedDay) {
         selectedDay.classList.remove('selected');
       }
 
-      // Add selected class to selected day
+      // Add selected class to selected currentDay
       event.target.classList.add('selected');
 
       // Update diary entry for selected date
-      const date = new Date(year, month, day);
+      const date = new Date(year, month, currentDay);
 
       displayDiaryEntry(date);
     }
@@ -127,45 +127,51 @@ function getMonthName(month) {
 
 function displayDiaryEntry(date) {
   diaryEntryElement.innerHTML = '';
-  const day = date.getDate();
-  
+  const currentDay = date.getDate();
 
+  // Format date
+  var year = date.getFullYear().toString(); // Get the last two digits of the year
+  var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+  var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+  var formattedDate = year + '-' + month + '-' + day;
+  
   // Date
   const header = document.createElement('h2');
   header.id = 'diary_header';
-  header.innerHTML = date.toDateString();
+  header.innerHTML = formattedDate;
+  
   diaryEntryElement.appendChild(header);
 
   // Input
-  const inputOneValue = '';
-  const inputTwoValue = '';
-  const inputThreeValue = '';
+  const work_description_content = '';
+  const experience_description_content = '';
+  const competency_content = '';
 
-  createInput('inputOne', inputOneValue, 'Work carried out');
-  createInput('inputTwo', inputTwoValue, 'Skills developed');
-  createInput('inputThree', inputThreeValue, 'Competency');
+  createInput('work_description', work_description_content, 'Work carried out');
+  createInput('experience_description', experience_description_content, 'Experience gained and skills developed');
+  createInput('competency', competency_content, 'Competency');
 
   // These inputs are defined with the createInput() function.
-  inputOne.classList.add('input');
-  inputTwo.classList.add('input');
-  inputThree.classList.add('input');
+  work_description.classList.add('input');
+  experience_description.classList.add('input');
+  competency.classList.add('input');
 
   // Button Submit
   createButton('submitbtn', '<i class="fa fa-check"></i>', function () {
-    const inputOneValue = document.getElementById('inputOne').value;
-    const inputTwoValue = document.getElementById('inputTwo').value;
-    const inputThreeValue = document.getElementById('inputThree').value;
-    const arr = [inputOneValue, inputTwoValue, inputThreeValue];
-    give(day, JSON.stringify(arr));
+    const work_description_content = document.getElementById('work_description').value;
+    const experience_description_content = document.getElementById('experience_description').value;
+    const competency_content = document.getElementById('competency').value;
+    const arr = [work_description_content, experience_description_content, competency_content];
+    give(currentDay, JSON.stringify(arr));
   });
 
   submitbtn.classList.add('functions');
   submitbtn.title = 'Click here to save your data'; 
   // Button Remove
-  createButton('removebtn', '<i class="fa fa-trash"></i>', remove, day);
+  createButton('removebtn', '<i class="fa fa-trash"></i>', remove, currentDay);
 
   removebtn.classList.add('functions');
-  removebtn.title = 'Click here to erase the data for this day'; 
+  removebtn.title = 'Click here to erase the data for this currentDay'; 
 
   // Button Clear
   createButton('clearbtn', '<i class="fa fa-times"></i>', clear);
@@ -174,11 +180,11 @@ function displayDiaryEntry(date) {
   clearbtn.title = 'Click here to ERASE ALL YOUR DATA! ';
 
   // Get stored values and set input values
-  const storedArr = JSON.parse(get(day));
+  const storedArr = JSON.parse(get(currentDay));
   if (storedArr && storedArr.length === 3) {
-    document.getElementById('inputOne').value = storedArr[0];
-    document.getElementById('inputTwo').value = storedArr[1];
-    document.getElementById('inputThree').value = storedArr[2];
+    document.getElementById('work_description').value = storedArr[0];
+    document.getElementById('experience_description').value = storedArr[1];
+    document.getElementById('competency').value = storedArr[2];
   }
 
   sendDataToFlask();
@@ -221,11 +227,11 @@ function closeNav() {
 function give(key, value) {
   localStorage.setItem(key, value);
 }
-function get(day) {
-  return localStorage.getItem(day);
+function get(currentDay) {
+  return localStorage.getItem(currentDay);
 }
-function remove(day) {
-  localStorage.removeItem(day);
+function remove(currentDay) {
+  localStorage.removeItem(currentDay);
 }
 function clear() {
   localStorage.clear();
@@ -234,9 +240,9 @@ function sendDataToFlask(){
   const data = {
     page_title: document.getElementById('page_heading').innerHTML,
     date: document.getElementById('diary_header').innerHTML,
-    inputOne: document.getElementById('inputOne').value,
-    inputTwo: document.getElementById('inputTwo').value,
-    inputThree: document.getElementById('inputThree').value
+    work_description: document.getElementById('work_description').value,
+    experience_description: document.getElementById('experience_description').value,
+    competency: document.getElementById('competency').value
 
 };
 
