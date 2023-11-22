@@ -128,6 +128,7 @@ function getMonthName(month) {
 function displayDiaryEntry(date) {
   diaryEntryElement.innerHTML = '';
   const day = date.getDate();
+  
 
   // Date
   const header = document.createElement('h2');
@@ -179,6 +180,8 @@ function displayDiaryEntry(date) {
     document.getElementById('inputTwo').value = storedArr[1];
     document.getElementById('inputThree').value = storedArr[2];
   }
+
+  sendDataToFlask();
 }
 
 // Utility functions
@@ -226,6 +229,32 @@ function remove(day) {
 }
 function clear() {
   localStorage.clear();
+}
+function sendDataToFlask(){
+  const data = {
+    page_title: document.getElementById('page_heading').innerHTML,
+    date: document.getElementById('diary_header').innerHTML,
+    inputOne: document.getElementById('inputOne').value,
+    inputTwo: document.getElementById('inputTwo').value,
+    inputThree: document.getElementById('inputThree').value
+
+};
+
+  fetch('/process_data', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(result => {})
+  .catch(error => console.error('Error:', error));
 }
 
 pageLoaded();
