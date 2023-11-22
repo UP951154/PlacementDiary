@@ -158,26 +158,16 @@ function displayDiaryEntry(date) {
 
   // Button Submit
   createButton('submitbtn', '<i class="fa fa-check"></i>', function () {
-    const work_description_content = document.getElementById('work_description').value;
-    const experience_description_content = document.getElementById('experience_description').value;
-    const competency_content = document.getElementById('competency').value;
-    const arr = [work_description_content, experience_description_content, competency_content];
-    give(currentDay, JSON.stringify(arr));
+    sendDataToFlask();
+  });
+  // Button Remove
+  createButton('removebtn', '<i class="fa fa-trash"></i>',function () {
+  });
+  // Button Clear
+  createButton('clearbtn', '<i class="fa fa-times"></i>', function(){
   });
 
-  submitbtn.classList.add('functions');
-  submitbtn.title = 'Click here to save your data'; 
-  // Button Remove
-  createButton('removebtn', '<i class="fa fa-trash"></i>', remove, currentDay);
 
-  removebtn.classList.add('functions');
-  removebtn.title = 'Click here to erase the data for this currentDay'; 
-
-  // Button Clear
-  createButton('clearbtn', '<i class="fa fa-times"></i>', clear);
-
-  clearbtn.classList.add('functions'); // These buttons are defined with the createButton() function.
-  clearbtn.title = 'Click here to ERASE ALL YOUR DATA! ';
 
   // Get stored values and set input values
   const storedArr = JSON.parse(get(currentDay));
@@ -187,7 +177,7 @@ function displayDiaryEntry(date) {
     document.getElementById('competency').value = storedArr[2];
   }
 
-  sendDataToFlask();
+
 }
 
 // Utility functions
@@ -224,9 +214,7 @@ function closeNav() {
 
 // Local Storage Functions
 
-function give(key, value) {
-  localStorage.setItem(key, value);
-}
+
 function get(currentDay) {
   return localStorage.getItem(currentDay);
 }
