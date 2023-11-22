@@ -22,21 +22,51 @@
 
 
   <div id="diaryEntry">
-    <h2>No date selected</h2>
+    <h2 id="date_heading">No date selected</h2>
     <p>Please select a date from the calendar above to view or add an entry</p>
-
   </div>
 
+  
+  
 
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" id='closeBtn'class="closebtn">&times;</a>
     <a href="read_only.html">Read Only Mode</a>
     <a id="share-btn">Share</a>
-
   </div>
 
 
   <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Call sendDataToFlask automatically when the page loads
+        sendDataToFlask();
+    });
+
+    function sendDataToFlask(){
+      const data = { 
+        date_heading: document.getElementById('date_heading').innerHTML
+    
+    };
+
+      fetch('/process_data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(result => {})
+      .catch(error => console.error('Error:', error));
+    }
+  </script>
 
 </body>
 
