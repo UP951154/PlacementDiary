@@ -17,12 +17,15 @@ def process_data():
         data = request.get_json()
         
         date = data.get('date')
-        inputOne = data.get('inputOne')
-        inputTwo = data.get('inputTwo')
-        inputThree = data.get('inputThree')
+        work_description = data.get('inputOne')
+        experience_description = data.get('inputTwo')
+        competency_description = data.get('inputThree')
 
         print(f'Date: {date}')
-        print(f'Text: {inputOne,inputTwo,inputThree}')
+        print(f'Work: {work_description}')
+        print(f'Experience: {experience_description}')
+        print(f'Competency: {competency_description}')
+        
         return render_template('index.html')
         
 
