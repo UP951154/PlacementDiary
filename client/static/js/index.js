@@ -49,9 +49,9 @@ function displayCalendar(month, year) {
     const rowElement = document.createElement('tr');
     for (let j = 0; j < 7; j++) {
       const cell = document.createElement('td');
-      cell.classList.add('day');
+      cell.classList.add('currentDay');
       if ((i === 0 && j < new Date(year, month, 1).getDay()) || dayOfMonth > daysInMonth) {
-        // Display empty cell for days before first day of month or after last day of month
+        // Display empty cell for days before first currentDay of month or after last currentDay of month
         cell.classList.add('disabled');
       } else {
         cell.innerHTML = dayOfMonth;
@@ -67,22 +67,22 @@ function displayCalendar(month, year) {
   }
 
   addEventListener('click', function (event) {
-    if (event.target.classList.contains('day')) {
-      const day = event.target.innerHTML;
+    if (event.target.classList.contains('currentDay')) {
+      const currentDay = event.target.innerHTML;
       const month = currentMonth;
       const year = currentYear;
 
-      // Remove selected class from previously selected day
+      // Remove selected class from previously selected currentDay
       const selectedDay = document.querySelector('.selected');
       if (selectedDay) {
         selectedDay.classList.remove('selected');
       }
 
-      // Add selected class to selected day
+      // Add selected class to selected currentDay
       event.target.classList.add('selected');
 
       // Update diary entry for selected date
-      const date = new Date(year, month, day);
+      const date = new Date(year, month, currentDay);
 
       displayDiaryEntry(date);
     }
@@ -94,11 +94,18 @@ function displayCalendar(month, year) {
   nextMonth.classList.add('calendar-btn');
   nextMonth.id = 'nextMonth';
   nextMonth.addEventListener('click', function () {
+    temp_year = year;
+    temp_month = month;
     if (month === 11) {
       displayCalendar(0, year + 1);
+      temp_year = year + 1;
+      
     } else {
       displayCalendar(month + 1, year);
+      temp_month = month + 1;
     }
+    const date = new Date(temp_year, temp_month, 1);
+    displayDiaryEntry(date);
   });
   header.appendChild(nextMonth);
 
@@ -107,11 +114,17 @@ function displayCalendar(month, year) {
   prevMonth.innerHTML = '<i class="fa fa-chevron-left"></i>';
   prevMonth.classList.add('calendar-btn');
   prevMonth.addEventListener('click', function () {
+    temp_year = year;
+    temp_month = month;
     if (month === 0) {
       displayCalendar(11, year - 1);
+      temp_year = year - 1
     } else {
       displayCalendar(month - 1, year);
+      temp_month = month - 1
     }
+    const date = new Date(temp_year, temp_month, 1);
+    displayDiaryEntry(date);
   });
   header.appendChild(prevMonth);
 }
@@ -127,58 +140,41 @@ function getMonthName(month) {
 
 function displayDiaryEntry(date) {
   diaryEntryElement.innerHTML = '';
-  const day = date.getDate();
+  const currentDay = date.getDate();
 
+  // Format date
+  var year = date.getFullYear().toString(); // Get the last two digits of the year
+  var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
+  var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
+  var formattedDate = year + '-' + month + '-' + day;
+
+  
   // Date
   const header = document.createElement('h2');
   header.id = 'diary_header';
+  // header.innerHTML = formattedDate;
   header.innerHTML = date.toDateString();
+  
   diaryEntryElement.appendChild(header);
 
   // Input
-  const inputOneValue = '';
-  const inputTwoValue = '';
-  const inputThreeValue = '';
+  createInput('work_description', '', 'Work carried out');
+  createInput('experience_description', '', 'Experience gained and skills developed');
+  createInput('competency', '', 'Competency');
 
-  createInput('inputOne', inputOneValue, 'Work carried out');
-  createInput('inputTwo', inputTwoValue, 'Skills developed');
-  createInput('inputThree', inputThreeValue, 'Competency');
-
-  // These inputs are defined with the createInput() function.
-  inputOne.classList.add('input');
-  inputTwo.classList.add('input');
-  inputThree.classList.add('input');
-
-  // Button Submit
+  // Buttons
   createButton('submitbtn', '<i class="fa fa-check"></i>', function () {
-    const inputOneValue = document.getElementById('inputOne').value;
-    const inputTwoValue = document.getElementById('inputTwo').value;
-    const inputThreeValue = document.getElementById('inputThree').value;
-    const arr = [inputOneValue, inputTwoValue, inputThreeValue];
-    give(day, JSON.stringify(arr));
+    sendDataToFlask(formattedDate);
+  });
+  createButton('removebtn', '<i class="fa fa-trash"></i>',function () {
+    deleteData(formattedDate);
+  });
+  createButton('clearbtn', '<i class="fa fa-times"></i>', function(){
+    clearCalendar();
   });
 
-  submitbtn.classList.add('functions');
-  submitbtn.title = 'Click here to save your data'; 
-  // Button Remove
-  createButton('removebtn', '<i class="fa fa-trash"></i>', remove, day);
-
-  removebtn.classList.add('functions');
-  removebtn.title = 'Click here to erase the data for this day'; 
-
-  // Button Clear
-  createButton('clearbtn', '<i class="fa fa-times"></i>', clear);
-
-  clearbtn.classList.add('functions'); // These buttons are defined with the createButton() function.
-  clearbtn.title = 'Click here to ERASE ALL YOUR DATA! ';
-
-  // Get stored values and set input values
-  const storedArr = JSON.parse(get(day));
-  if (storedArr && storedArr.length === 3) {
-    document.getElementById('inputOne').value = storedArr[0];
-    document.getElementById('inputTwo').value = storedArr[1];
-    document.getElementById('inputThree').value = storedArr[2];
-  }
+  retrieveData(formattedDate)
+  
 }
 
 // Utility functions
@@ -213,19 +209,117 @@ function closeNav() {
   document.getElementById('mySidenav').style.width = '0';
 }
 
-// Local Storage Functions
+// APIS
 
-function give(key, value) {
-  localStorage.setItem(key, value);
+function sendDataToFlask(date) {
+  const data = {
+    page_title: document.getElementById('page_heading').innerHTML,
+    date: date,
+    work_description: document.getElementById('work_description').value,
+    experience_description: document.getElementById('experience_description').value,
+    competency: document.getElementById('competency').value,
+  };
+
+  fetch('/insert_data', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(result => {
+      // Handle the result if needed
+    })
+    .catch(error => {
+      console.error('Error:', error.message); // Log the error message
+    });
 }
-function get(day) {
-  return localStorage.getItem(day);
+
+function retrieveData(date){
+  date = date
+  fetch('/retrieve_data', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+          'date': date,  // Replace with the actual date or get it dynamically
+      }),
+  })
+  .then(response => {
+      // Check if the response is not empty
+      if (response.ok && response.headers.get('content-length') !== '0') {
+        return response.json();
+      } else {
+        return '';  // Return an empty string if the response is empty
+      }
+    })
+  .then(data => {
+      // Handle the retrieved data here
+      if (data.length >= 3) {
+        document.getElementById('work_description').value = data[0];
+        document.getElementById('experience_description').value = data[1];
+        document.getElementById('competency').value = data[2];
+      } else {
+        document.getElementById('work_description').value = '';
+        document.getElementById('experience_description').value = '';
+        document.getElementById('competency').value = '';
+      }
+
+  })
+  .catch(error => {
+      console.error('Error:', error);
+  });
 }
-function remove(day) {
-  localStorage.removeItem(day);
+
+function deleteData(date){
+      
+  const data = {
+
+    date: date,
+
+  };
+
+  fetch('/delete_data', {
+    method: 'POST',
+    headers: {
+  'Content-Type': 'application/json',
+  },
+    body: JSON.stringify(data),
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+})
+  .then(data => {   
+  })
 }
-function clear() {
-  localStorage.clear();
+
+function clearCalendar() {
+  // Assuming you have a Flask route to handle the clear_calendar function
+  fetch('/clear_calendar')
+      .then(response => {
+          if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json(); // assuming server returns JSON
+      })
+      .then(data => {
+          console.log(data);
+          location.reload(true); // log the response from the server
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
 }
+
 
 pageLoaded();
