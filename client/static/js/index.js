@@ -143,41 +143,22 @@ function displayDiaryEntry(date) {
   diaryEntryElement.appendChild(header);
 
   // Input
-  const work_description_content = '';
-  const experience_description_content = '';
-  const competency_content = '';
+  createInput('work_description', '', 'Work carried out');
+  createInput('experience_description', '', 'Experience gained and skills developed');
+  createInput('competency', '', 'Competency');
 
-  createInput('work_description', work_description_content, 'Work carried out');
-  createInput('experience_description', experience_description_content, 'Experience gained and skills developed');
-  createInput('competency', competency_content, 'Competency');
-
-  // These inputs are defined with the createInput() function.
-  work_description.classList.add('input');
-  experience_description.classList.add('input');
-  competency.classList.add('input');
-
-  // Button Submit
+  // Buttons
   createButton('submitbtn', '<i class="fa fa-check"></i>', function () {
     sendDataToFlask();
   });
-  // Button Remove
   createButton('removebtn', '<i class="fa fa-trash"></i>',function () {
+    deleteData();
   });
-  // Button Clear
   createButton('clearbtn', '<i class="fa fa-times"></i>', function(){
   });
 
-
-
-  // Get stored values and set input values
-  const storedArr = JSON.parse(get(currentDay));
-  if (storedArr && storedArr.length === 3) {
-    document.getElementById('work_description').value = storedArr[0];
-    document.getElementById('experience_description').value = storedArr[1];
-    document.getElementById('competency').value = storedArr[2];
-  }
-
-
+  retrieveData()
+  
 }
 
 // Utility functions
@@ -215,24 +196,18 @@ function closeNav() {
 // Local Storage Functions
 
 
-function get(currentDay) {
-  return localStorage.getItem(currentDay);
-}
-function remove(currentDay) {
-  localStorage.removeItem(currentDay);
-}
 function clear() {
   localStorage.clear();
 }
-function sendDataToFlask(){
+
+function sendDataToFlask() {
   const data = {
     page_title: document.getElementById('page_heading').innerHTML,
     date: document.getElementById('diary_header').innerHTML,
     work_description: document.getElementById('work_description').value,
     experience_description: document.getElementById('experience_description').value,
-    competency: document.getElementById('competency').value
-
-};
+    competency: document.getElementById('competency').value,
+  };
 
   fetch('/process_data', {
     method: 'POST',
@@ -241,14 +216,80 @@ function sendDataToFlask(){
     },
     body: JSON.stringify(data),
   })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(result => {
+      // Handle the result if needed
+    })
+    .catch(error => {
+      console.error('Error:', error.message); // Log the error message
+    });
+}
+
+function retrieveData(){
+  date = document.getElementById('diary_header').innerHTML
+  fetch('/retrieve_data', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+          'date': date,  // Replace with the actual date or get it dynamically
+      }),
+  })
+  .then(response => {
+      // Check if the response is not empty
+      if (response.ok && response.headers.get('content-length') !== '0') {
+        return response.json();
+      } else {
+        return '';  // Return an empty string if the response is empty
+      }
+    })
+  .then(data => {
+      // Handle the retrieved data here
+      if (data.length >= 3) {
+        document.getElementById('work_description').value = data[0];
+        document.getElementById('experience_description').value = data[1];
+        document.getElementById('competency').value = data[2];
+      } else {
+        document.getElementById('work_description').value = '';
+        document.getElementById('experience_description').value = '';
+        document.getElementById('competency').value = '';
+      }
+
+  })
+  .catch(error => {
+      console.error('Error:', error);
+  });
+}
+
+function deleteData(){
+      
+  const data = {
+
+    date: document.getElementById('diary_header').innerHTML,
+
+  };
+
+  fetch('/delete_data', {
+    method: 'POST',
+    headers: {
+  'Content-Type': 'application/json',
+  },
+    body: JSON.stringify(data),
+  })
   .then(response => {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     return response.json();
+})
+  .then(data => {   
   })
-  .then(result => {})
-  .catch(error => console.error('Error:', error));
 }
 
 pageLoaded();

@@ -27,7 +27,6 @@
   </div>
 
 
-
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" id='closeBtn'class="closebtn">&times;</a>
     <a href="read_only.html">Read Only Mode</a>
@@ -35,18 +34,14 @@
   </div>
 
 
-  <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+  <!-- <button onclick="deleteData()"></button> -->
 
   <script>
-
-    document.addEventListener('DOMContentLoaded', function () {
-        // Call sendDataToFlask automatically when the page loads
-        sendDataToFlask();
-    });
-
     
-  
+
   </script>
+
+  <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 
 </body>
 

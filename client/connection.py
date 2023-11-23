@@ -34,7 +34,23 @@ def select(date):
         cursor.execute(query)
         result = cursor.fetchall()
 
-        return result if result else 'no data'
+        return result if result else None
+    finally:
+        cursor.close()
+        connection.close()
+
+def delete(date):
+
+    connection = create_connection()
+    cursor = connection.cursor()
+
+    try:
+
+        query = f"DELETE FROM diary_entry WHERE date='{date}'"
+        cursor.execute(query)
+        connection.commit()
+
+        return 'data deleted'
     finally:
         cursor.close()
         connection.close()
