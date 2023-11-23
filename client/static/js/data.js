@@ -15,6 +15,14 @@ function pageLoaded() {
   const diaryEntryElement = document.getElementById('diaryEntry');
   
   
+  const dataContainer = document.getElementById('data-container');
+  const year = dataContainer.getAttribute('data-year');
+  const month = dataContainer.getAttribute('data-month');
+  const day = dataContainer.getAttribute('data-day')
+  
+  const date = new Date(year, month, day);
+
+  displayDiaryEntry(date)
 
 
   function displayDiaryEntry(date) {

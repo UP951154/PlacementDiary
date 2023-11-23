@@ -11,7 +11,13 @@ def home():
 
 @app.route('/data')
 def data_page():
-    return render_template('data.html')
+    year = request.args.get('year')
+    month = request.args.get('month')
+    day = request.args.get('day')
+
+    # Use the values as needed
+
+    return render_template('data.html', year=year, month=month, day=day)
 
 @app.route('/retrieve_data', methods=['POST'])
 def retrieve_data():
