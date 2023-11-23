@@ -110,8 +110,7 @@ function displayCalendar(month, year) {
       displayCalendar(month + 1, year);
       temp_month = month + 1;
     }
-    const date = new Date(temp_year, temp_month, 1);
-    displayDiaryEntry(date);
+
   });
   header.appendChild(nextMonth);
 
@@ -127,9 +126,7 @@ function displayCalendar(month, year) {
     } else {
       displayCalendar(month - 1, year);
       temp_month = month - 1
-    }
-    const date = new Date(temp_year, temp_month, 1);
-    displayDiaryEntry(date);
+    }  
   });
   header.appendChild(prevMonth);
 }

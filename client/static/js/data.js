@@ -27,22 +27,17 @@ function pageLoaded() {
 
   function displayDiaryEntry(date) {
     diaryEntryElement.innerHTML = '';
-    const currentDay = date.getDate();
-  
-    // Format date
+    
+    
     var year = date.getFullYear().toString(); // Get the last two digits of the year
     var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
     var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
     var formattedDate = year + '-' + month + '-' + day;
   
-    
-    // Date
-    const header = document.createElement('h2');
-    header.id = 'diary_header';
-    // header.innerHTML = formattedDate;
+    const header = document.getElementById('diary_header')
     header.innerHTML = date.toDateString();
     
-    diaryEntryElement.appendChild(header);
+
   
     // Input
     createInput('work_description', '', 'Work carried out');
@@ -50,15 +45,21 @@ function pageLoaded() {
     createInput('competency', '', 'Competency');
   
     // Buttons
-    createButton('submitbtn', '<i class="fa fa-check"></i>', function () {
-      sendDataToFlask(formattedDate);
+    const submitbtn = document.getElementById('submitbtn');
+    submitbtn.addEventListener('click', function(){
+        sendDataToFlask(formattedDate)
     });
-    createButton('removebtn', '<i class="fa fa-trash"></i>',function () {
-      deleteData(formattedDate);
+
+    const removebtn = document.getElementById('removebtn');
+    removebtn.addEventListener('click', function() {
+        deleteData(formattedDate)
     });
-    createButton('clearbtn', '<i class="fa fa-times"></i>', function(){
-      clearCalendar();
+   
+    const clearbtn = document.getElementById('clearbtn');
+    clearbtn.addEventListener('click', function() {
+        clearCalendar()
     });
+
   
     retrieveData(formattedDate)
     
@@ -66,19 +67,6 @@ function pageLoaded() {
   
   // Utility functions
   
-  function createButton(id, content, onclickFunc, onclickParams) {
-    const btn = document.createElement('button');
-    btn.id = id;
-    btn.innerHTML = content;
-    btn.addEventListener('click', function () {
-      if (Array.isArray(onclickParams)) {
-        onclickFunc(...onclickParams);
-      } else {
-        onclickFunc(onclickParams);
-      }
-    });
-    diaryEntryElement.appendChild(btn);
-  }
   
   function createInput(id, content, placeholder) {
     const input = document.createElement('textarea');
