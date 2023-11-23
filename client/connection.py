@@ -3,15 +3,8 @@ from psycopg2 import sql
 from psycopg2.errors import UndefinedTable
 
 def create_connection():
-    
-    db_credentials = {
-        'host': 'localhost',
-        'port': '5432',
-        'user': 'vferreira',
-        'database': 'diary'
-    }
-    
-    return psycopg2.connect(**db_credentials)
+        
+    return psycopg2.connect('postgres://lzrafpxy:1D0Sq3CwmA0Zi9FJP4reYSqqFE9W6w5I@flora.db.elephantsql.com/lzrafpxy')
 
 def insert(date, text1, text2, text3):
 

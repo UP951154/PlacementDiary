@@ -220,7 +220,7 @@ function sendDataToFlask(date) {
     competency: document.getElementById('competency').value,
   };
 
-  fetch('/process_data', {
+  fetch('/insert_data', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

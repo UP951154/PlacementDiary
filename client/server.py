@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
-import psycopg2
-from connection import create_connection, insert, select, delete, drop
+
+from connection import insert, select, delete, drop
 
 app = Flask(__name__)
 
@@ -18,8 +18,8 @@ def retrieve_data():
     else:
         return jsonify('')  # Return an empty string if the row doesn't exist
 
-@app.route('/process_data', methods=['POST'])
-def process_data():
+@app.route('/insert_data', methods=['POST'])
+def insert_data():
     try:
         data = request.get_json()
 
@@ -51,26 +51,6 @@ def clear_calendar():
     print('Table deleted')
     
     return jsonify({'message': 'Table deleted'})
-
-def create_table():
-    connection = create_connection()
-    cursor = connection.cursor()
-
-    try:
-        query = """
-        CREATE TABLE IF NOT EXISTS diary_entry (
-            date DATE PRIMARY KEY,
-            text1 TEXT,
-            text2 TEXT,
-            text3 TEXT
-        )
-        """
-        cursor.execute(query)
-        connection.commit()
-    finally:
-        cursor.close()
-        connection.close()
-
 
 if __name__ == '__main__':
     app.run(debug=True)
