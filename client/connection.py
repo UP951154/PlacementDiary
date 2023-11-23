@@ -1,4 +1,6 @@
 import psycopg2
+from psycopg2 import sql
+from psycopg2.errors import UndefinedTable
 
 def create_connection():
     
@@ -25,11 +27,18 @@ def insert(date, text1, text2, text3):
         connection.close()
 
 def select(date):
-
     connection = create_connection()
     cursor = connection.cursor()
 
     try:
+        # Check if the table exists, and create it if it doesn't
+        try:
+            cursor.execute(sql.SQL("SELECT 1 FROM {} LIMIT 1").format(sql.Identifier('diary_entry')))
+        except UndefinedTable:
+            create_table()
+            connection.commit()
+
+        # Your original select query
         query = f"SELECT text1, text2, text3 FROM diary_entry WHERE date='{date}'"
         cursor.execute(query)
         result = cursor.fetchall()
@@ -55,3 +64,38 @@ def delete(date):
         cursor.close()
         connection.close()
 
+def drop():
+    connection = create_connection()
+    cursor = connection.cursor()
+
+    try:
+
+        query = "DROP TABLE IF EXISTS diary_entry"
+        cursor.execute(query)
+        connection.commit()
+
+    finally:
+        cursor.close()
+        connection.close()
+
+def create_table():
+    connection = create_connection()
+    cursor = connection.cursor()
+
+    try:
+        query = """
+        CREATE TABLE IF NOT EXISTS diary_entry (
+            date DATE PRIMARY KEY,
+            text1 TEXT,
+            text2 TEXT,
+            text3 TEXT
+        )
+        """
+        cursor.execute(query)
+        connection.commit()  # Commit the transaction immediately after creating the table
+    except Exception as e:
+        print(f"Error creating table: {e}")
+        connection.rollback()  # Rollback the transaction on failure
+    finally:
+        cursor.close()
+        connection.close()

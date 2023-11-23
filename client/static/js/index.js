@@ -155,6 +155,7 @@ function displayDiaryEntry(date) {
     deleteData();
   });
   createButton('clearbtn', '<i class="fa fa-times"></i>', function(){
+    clearCalendar();
   });
 
   retrieveData()
@@ -193,12 +194,7 @@ function closeNav() {
   document.getElementById('mySidenav').style.width = '0';
 }
 
-// Local Storage Functions
-
-
-function clear() {
-  localStorage.clear();
-}
+// APIS
 
 function sendDataToFlask() {
   const data = {
@@ -291,5 +287,24 @@ function deleteData(){
   .then(data => {   
   })
 }
+
+function clearCalendar() {
+  // Assuming you have a Flask route to handle the clear_calendar function
+  fetch('/clear_calendar')
+      .then(response => {
+          if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json(); // assuming server returns JSON
+      })
+      .then(data => {
+          console.log(data);
+          location.reload(true); // log the response from the server
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
+}
+
 
 pageLoaded();
