@@ -11,12 +11,17 @@ def home():
 
 @app.route('/retrieve_data', methods=['POST'])
 def retrieve_data():
-    data = select(request.form['date'])
-
-    if data is not None:  # Check if data is not None (i.e., row exists)
-        return jsonify(data[0])
-    else:
-        return jsonify('')  # Return an empty string if the row doesn't exist
+    try:
+        data = select(request.form['date'])
+        
+        if data is not None:  # Check if data is not None (i.e., row exists)
+            
+            return jsonify(data[0])
+        else:
+            
+            return jsonify('')  # Return an empty string if the row doesn't exist
+    except Exception as e:
+        return f'Error retrieving data: {e}'
 
 @app.route('/insert_data', methods=['POST'])
 def insert_data():
@@ -53,4 +58,4 @@ def clear_calendar():
     return jsonify({'message': 'Table deleted'})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

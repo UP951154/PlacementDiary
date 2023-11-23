@@ -19,6 +19,8 @@ displayCalendar(currentMonth, currentYear);
 function displayCalendar(month, year) {
   const daysInMonth = getDaysInMonth(month, year);
   const calendar = document.getElementById('calendar');
+  var temp_year = year;
+  var temp_month = month;
 
   // Clear calendar
   calendar.innerHTML = '';
@@ -69,8 +71,8 @@ function displayCalendar(month, year) {
   addEventListener('click', function (event) {
     if (event.target.classList.contains('currentDay')) {
       const currentDay = event.target.innerHTML;
-      const month = currentMonth;
-      const year = currentYear;
+      const month = temp_month;
+      const year = temp_year;
 
       // Remove selected class from previously selected currentDay
       const selectedDay = document.querySelector('.selected');
@@ -114,8 +116,7 @@ function displayCalendar(month, year) {
   prevMonth.innerHTML = '<i class="fa fa-chevron-left"></i>';
   prevMonth.classList.add('calendar-btn');
   prevMonth.addEventListener('click', function () {
-    temp_year = year;
-    temp_month = month;
+ 
     if (month === 0) {
       displayCalendar(11, year - 1);
       temp_year = year - 1
@@ -253,7 +254,7 @@ function retrieveData(date){
       }),
   })
   .then(response => {
-      // Check if the response is not empty
+      
       if (response.ok && response.headers.get('content-length') !== '0') {
         return response.json();
       } else {
