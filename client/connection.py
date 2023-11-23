@@ -17,11 +17,23 @@ def insert(date, text1, text2, text3):
 
     connection = create_connection()
     cursor = connection.cursor()
-
+    
     try:
-        query = "INSERT INTO diary_entry (date, text1, text2, text3) VALUES (%s, %s, %s, %s)"
-        cursor.execute(query, (date, text1, text2, text3))
+        query = f"""
+        INSERT INTO diary_entry (date, text1, text2, text3)
+        VALUES ('{date}', '{text1}', '{text2}', '{text3}')
+        ON CONFLICT (date)
+        DO UPDATE SET
+        text1 = EXCLUDED.text1,
+        text2 = EXCLUDED.text2,
+        text3 = EXCLUDED.text3;
+        """
+        cursor.execute(query)
         connection.commit()
+        print('Data inserted into the database')
+    except Exception as e:
+        print(f"Error updating data: {e}")
+        
     finally:
         cursor.close()
         connection.close()

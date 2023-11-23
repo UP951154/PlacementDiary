@@ -9,27 +9,6 @@ def home():
     print('Flask app running')
     return render_template('index.html')
 
-@app.route('/process_data', methods=['POST'])
-def process_data():
-    print('Processing data')
-    try:
-        data = request.get_json()
-
-        date = data.get('date')
-        work_description = data.get('work_description')
-        experience_description = data.get('experience_description')
-        competency = data.get('competency')
-
-        
-        insert(date, work_description, experience_description, competency)
-        
-        return jsonify({'status': 'success'})
-        
-
-    except Exception as e:
-        
-        return f'Error processing data: {str(e)}', 500
-
 @app.route('/retrieve_data', methods=['POST'])
 def retrieve_data():
     data = select(request.form['date'])
@@ -38,6 +17,23 @@ def retrieve_data():
         return jsonify(data[0])
     else:
         return jsonify('')  # Return an empty string if the row doesn't exist
+
+@app.route('/process_data', methods=['POST'])
+def process_data():
+    try:
+        data = request.get_json()
+
+        date = data.get('date')
+        work_description = data.get('work_description')
+        experience_description = data.get('experience_description')
+        competency = data.get('competency')
+
+        insert(date, work_description, experience_description, competency)
+        return jsonify({'status': 'success'})
+        
+
+    except Exception as e:
+        return f'Error processing data: {str(e)}', 500
 
 @app.route('/delete_data', methods=['POST'])
 def delete_data():
