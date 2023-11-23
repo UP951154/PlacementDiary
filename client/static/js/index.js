@@ -147,11 +147,13 @@ function displayDiaryEntry(date) {
   var month = ('0' + (date.getMonth() + 1)).slice(-2); // Add leading zero if needed
   var day = ('0' + date.getDate()).slice(-2); // Add leading zero if needed
   var formattedDate = year + '-' + month + '-' + day;
+
   
   // Date
   const header = document.createElement('h2');
   header.id = 'diary_header';
-  header.innerHTML = formattedDate;
+  // header.innerHTML = formattedDate;
+  header.innerHTML = date.toDateString();
   
   diaryEntryElement.appendChild(header);
 
@@ -162,16 +164,16 @@ function displayDiaryEntry(date) {
 
   // Buttons
   createButton('submitbtn', '<i class="fa fa-check"></i>', function () {
-    sendDataToFlask();
+    sendDataToFlask(formattedDate);
   });
   createButton('removebtn', '<i class="fa fa-trash"></i>',function () {
-    deleteData();
+    deleteData(formattedDate);
   });
   createButton('clearbtn', '<i class="fa fa-times"></i>', function(){
     clearCalendar();
   });
 
-  retrieveData()
+  retrieveData(formattedDate)
   
 }
 
@@ -209,10 +211,10 @@ function closeNav() {
 
 // APIS
 
-function sendDataToFlask() {
+function sendDataToFlask(date) {
   const data = {
     page_title: document.getElementById('page_heading').innerHTML,
-    date: document.getElementById('diary_header').innerHTML,
+    date: date,
     work_description: document.getElementById('work_description').value,
     experience_description: document.getElementById('experience_description').value,
     competency: document.getElementById('competency').value,
@@ -239,8 +241,8 @@ function sendDataToFlask() {
     });
 }
 
-function retrieveData(){
-  date = document.getElementById('diary_header').innerHTML
+function retrieveData(date){
+  date = date
   fetch('/retrieve_data', {
       method: 'POST',
       headers: {
@@ -276,11 +278,11 @@ function retrieveData(){
   });
 }
 
-function deleteData(){
+function deleteData(date){
       
   const data = {
 
-    date: document.getElementById('diary_header').innerHTML,
+    date: date,
 
   };
 
