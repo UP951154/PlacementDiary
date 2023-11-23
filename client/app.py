@@ -9,7 +9,6 @@ def home():
     print('Flask app running')
     return render_template('index.html')
 
-
 @app.route('/process_data', methods=['POST'])
 def process_data():
     print('Processing data')

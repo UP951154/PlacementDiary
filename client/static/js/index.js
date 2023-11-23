@@ -94,11 +94,18 @@ function displayCalendar(month, year) {
   nextMonth.classList.add('calendar-btn');
   nextMonth.id = 'nextMonth';
   nextMonth.addEventListener('click', function () {
+    temp_year = year;
+    temp_month = month;
     if (month === 11) {
       displayCalendar(0, year + 1);
+      temp_year = year + 1;
+      
     } else {
       displayCalendar(month + 1, year);
+      temp_month = month + 1;
     }
+    const date = new Date(temp_year, temp_month, 1);
+    displayDiaryEntry(date);
   });
   header.appendChild(nextMonth);
 
@@ -107,11 +114,17 @@ function displayCalendar(month, year) {
   prevMonth.innerHTML = '<i class="fa fa-chevron-left"></i>';
   prevMonth.classList.add('calendar-btn');
   prevMonth.addEventListener('click', function () {
+    temp_year = year;
+    temp_month = month;
     if (month === 0) {
       displayCalendar(11, year - 1);
+      temp_year = year - 1
     } else {
       displayCalendar(month - 1, year);
+      temp_month = month - 1
     }
+    const date = new Date(temp_year, temp_month, 1);
+    displayDiaryEntry(date);
   });
   header.appendChild(prevMonth);
 }
