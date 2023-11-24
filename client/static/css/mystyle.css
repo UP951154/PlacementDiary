@@ -65,13 +65,14 @@ td {
 #icon{
     color: white;
     position: absolute;
-    top: 25px;
+    top: 5px;
     left: 15px;
 }
 
 #page_heading{
     color: white;
     background-color: black;
+    padding-bottom: 20px;
     text-align: center;
 
 
@@ -120,11 +121,11 @@ a{
     font-weight: bold;
 }
 #submitbtn{
-    border: solid green;
+    border: solid rgb(8, 195, 8);
 
 }
-#submitbtn:active {background-color: green;}
-#submitbtn:hover {background-color: green;}
+#submitbtn:active {background-color:rgb(8, 195, 8);}
+#submitbtn:hover {background-color: rgb(8, 195, 8);}
 
 #removebtn{
     border: solid red;
