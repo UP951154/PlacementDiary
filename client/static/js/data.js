@@ -36,6 +36,7 @@ function pageLoaded() {
   
     const header = document.getElementById('diary_header')
     header.innerHTML = date.toDateString();
+    // header.innerHTML = date.toDateString();
     
 
   
@@ -55,10 +56,10 @@ function pageLoaded() {
         deleteData(formattedDate)
     });
    
-    const clearbtn = document.getElementById('clearbtn');
-    clearbtn.addEventListener('click', function() {
-        clearCalendar()
-    });
+    // const clearbtn = document.getElementById('clearbtn');
+    // clearbtn.addEventListener('click', function() {
+    //     clearCalendar()
+    // });
 
   
     retrieveData(formattedDate)
