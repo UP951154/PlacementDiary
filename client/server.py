@@ -9,6 +9,16 @@ def home():
     print('Flask app running')
     return render_template('index.html')
 
+@app.route('/data')
+def data_page():
+    year = request.args.get('year')
+    month = request.args.get('month')
+    day = request.args.get('day')
+
+    # Use the values as needed
+
+    return render_template('data.html', year=year, month=month, day=day)
+
 @app.route('/retrieve_data', methods=['POST'])
 def retrieve_data():
     try:
@@ -57,5 +67,6 @@ def clear_calendar():
     
     return jsonify({'message': 'Table deleted'})
 
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(debug=True)

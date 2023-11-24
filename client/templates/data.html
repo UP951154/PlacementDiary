@@ -13,13 +13,31 @@
 </head>
 
 <body>
+  
+  <div id="page_top">
+    <span id="icon" class="fa fa-bars fa-2x"></span>
 
+    <a href="{{ url_for('home') }}">
+        <h1 id="page_heading">
+        Placement Diary</h1>
+    </a>
 
-  <span id="icon" class="fa fa-bars fa-2x"></span>
-  <h1 id="page_heading">
-    Placement Diary</h1>
+  </div>  
+  
+  <h2 id="diary_header"></h2>
 
-  <div id="calendar"></div>
+  <div id="diaryEntry">
+    <h2>No date selected</h2>
+    <p>Please select a date from the calendar above to view or add an entry</p>
+  </div><br>
+
+  <div id="buttons_div">
+    
+    <button id="submitbtn"><i class="fa fa-check"></i></button>
+    <button id="removebtn"><i class="fa fa-trash"></i></button>
+    <!-- <button id="clearbtn"><i class="fa fa-times"></i></button> -->
+  </div>
+
 
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" id='closeBtn'class="closebtn">&times;</a>
@@ -29,7 +47,9 @@
 
 
 
-  <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+  <div id="data-container" data-year="{{ year }}" data-month="{{ month }}" data-day="{{ day }}"></div>
+
+  <script src="{{ url_for('static', filename='js/data.js') }}"></script>
 
 </body>
 

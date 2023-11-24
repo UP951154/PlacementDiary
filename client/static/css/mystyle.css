@@ -4,13 +4,23 @@
     --full: 100%;
     --hoverclr:rgb(67, 65, 65);
   }
-
-h1 {
-    text-align: center;
-    white-space: nowrap;
+h1{
+    font-family: "Alegreya", sans-serif;
+    font-size: xx-large;
+    font-weight: bold;
+}
+h2{
+    font-family: "Alegreya", sans-serif;
+    font-size: xx-large;
+    font-weight: bold;
+}
+body{
+    background-color: white;
+    font-family: "Alegreya", sans-serif;
+    font-size: medium;
+    font-weight: regular;
 }
 
-/* Calendar */
 #calendar {
     width: var(--full);
     max-width: 900px;
@@ -18,13 +28,11 @@ h1 {
     font-family: Arial, sans-serif;
 }
 
-/* Grid */
 table {
     width: var(--full);
     border-collapse: collapse;
 }
 
-/* Month arrows */
 .calendar-btn {
     float: right;
     border: none;
@@ -34,7 +42,6 @@ table {
     margin: 0 10px;
 }
 
-/* The day your currently working on */
 .selected {
     background-color: var(--mycol);
 }
@@ -55,46 +62,97 @@ td {
     color: white;
 }
 
-/* Full date of the month your inserting entries */
-#diaryEntry {
-    margin-top: 25px;
+#icon{
+    color: white;
+    position: absolute;
+    top: 5px;
+    left: 15px;
+}
+
+#page_heading{
+    color: white;
+    background-color: black;
+    padding-bottom: 20px;
     text-align: center;
-    padding: 0%;
+
+
 }
 
-/* Input boxes */
-.input {
-    display: inline;
-    width: 27%;
-    height: 80px;
-    padding: 1%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    margin-right: 1%;
-    margin-left: 1%;
+a{
+    text-decoration: none;
 }
 
-/* Function Buttons */
-.functions {
-    display: inline-block;
+#diary_header{
+
+    min-height: 50px;
+    font-size: xx-large;
+    text-align: center;
+    
+}
+#diaryEntry {
+
+    min-height: 50px;
+    text-align: center;
+    padding: 2%;
+}
+
+#buttons_div{
+
+    text-align: center;
+    min-height: 50px;
+    padding: 2%;
+    display: flex;
+
+
+}
+
+
+
+#submitbtn, #removebtn, #clearbtn{
     background-color: white;
-    font-size: 25px;
-    display: inline;
-    width: 10%;
-    padding: 10px;
-    border: 1px solid var(--maincol);
+    border: solid;
+    border-width: 3px;
     border-radius: 5px;
-    margin-right: 25px;
-    margin-left: 25px;
-    margin-top: 20px;
+    font-size: large;
+    padding: 20px 30px;
+    margin: auto;
+    font-family: "Alegreya", "sans-serif";
+    font-size: medium;
+    font-weight: bold;
+}
+#submitbtn{
+    border: solid rgb(8, 195, 8);
+
+}
+#submitbtn:active {background-color:rgb(8, 195, 8);}
+#submitbtn:hover {background-color: rgb(8, 195, 8);}
+
+#removebtn{
+    border: solid red;
+}
+
+#removebtn:active{background-color: red;}
+#removebtn:hover{background-color: red;}
+
+#work_description, #experience_description, #competency{
+    background-color:rgb(237, 236, 235);
+    padding: 7vw 6vw;
+    margin: auto;
+    border: solid black;
+    border-width: 1px;
+    border-radius: 5px;
+    text-align: justify;
+    line-height: 1.5;
+    font-family: "Alegreya", "sans-serif";
+    font-size: medium;
+
 }
 
 
-/* Function buttons when clicked */
-.functions:active {
-    background-color: grey;
-}
+
+
+
+
 
 /* The side navigation menu */
 .sidenav {
@@ -138,11 +196,7 @@ td:hover, .calendar-btn:hover  {
     font-size: 36px;
     margin-left: 50px;
 }
-#icon{
-    position: absolute;
-    top: 10px;
-    left: 10px;
-}
+
 
 @media (max-width: 500px){
     
