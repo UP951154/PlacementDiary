@@ -27,12 +27,11 @@ In conclusion, even though the absence of a database presented challenges, I am 
 3. Run the following commands inside repo directory
 
 ```bash
-  npm install
-  npm start
+  python3 server.py
 ```
 3. Paste the url on your browser
 ```bash
-localhost:8080
+  http://127.0.0.1:5000
 ```
 4. Enjoy
 

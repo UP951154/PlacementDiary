@@ -40,10 +40,6 @@ function pageLoaded() {
     
 
   
-    // Input
-    createInput('work_description', '', 'Work carried out');
-    createInput('experience_description', '', 'Experience gained and skills developed');
-    createInput('competency', '', 'Competency');
   
     // Buttons
     const submitbtn = document.getElementById('submitbtn');
