@@ -1,9 +1,15 @@
 function pageLoaded() {
   console.log('js ready');
+  
   const shareButton = document.getElementById('share-btn');
   shareButton.addEventListener('click', function () {
     const readOnlyLink = window.location.origin + '/read_only.html';
     alert('Share this link with others to view your diary: \n\n' + readOnlyLink);
+  });
+  const clearButton = document.getElementById('clearbtn');
+  clearButton.addEventListener('click', function (){
+    clearCalendar();
+    alert('All data from calendar was deleted')
   });
   document.getElementById('icon').addEventListener('click', openNav);
   document.getElementById('closeBtn').addEventListener('click', closeNav);
@@ -142,6 +148,23 @@ function getMonthName(month) {
 
 
 // Utility functions
+function clearCalendar() {
+  // Assuming you have a Flask route to handle the clear_calendar function
+  fetch('/clear_calendar')
+      .then(response => {
+          if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json(); // assuming server returns JSON
+      })
+      .then(data => {
+          console.log(data);
+          location.reload(true); // log the response from the server
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
+}
 
 function openNav() {
   document.getElementById('mySidenav').style.width = '250px';
